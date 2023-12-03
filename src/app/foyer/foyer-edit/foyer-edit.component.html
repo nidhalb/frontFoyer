@@ -1,0 +1,106 @@
+<app-sidebar></app-sidebar>
+<app-navbar></app-navbar>
+
+<div class="main-content">
+  <div class="container main-card mb-3 p-5 card col-8">
+    <div class="card-body">
+      <h5 class="card-title">Edit residence</h5>
+      <form [formGroup]="residenceForm" (ngSubmit)="onSubmit()">
+        <div class="position-relative form-group">
+          <label for="nomFoyer">Residence Name</label>
+          <input
+            type="text"
+            name="nomFoyer"
+            placeholder="Residence Name"
+            [(ngModel)]="foyer.nomFoyer"
+            [ngClass]="{ 'is-invalid': submitted && form.nomFoyer.errors }"
+            class="form-control"
+            required
+          />
+          <div
+            *ngIf="submitted && form.nomFoyer.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="form.nomFoyer.errors.required">
+              Residence Name is required
+            </div>
+          </div>
+          <div
+            *ngIf="submitted && form.nomFoyer.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="form.nomFoyer.errors?.['minLength']">
+              Min length is 3
+            </div>
+          </div>
+        </div>
+
+        <div class="position-relative form-group">
+          <label for="capacityFoyer">Capacity</label>
+          <input
+            type="number"
+            name="capacityFoyer"
+            placeholder="Capacity"
+            [(ngModel)]="foyer.capacityFoyer"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && form.capacityFoyer.errors }"
+          />
+          <div
+            *ngIf="submitted && form.capacityFoyer.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="form.capacityFoyer.errors.required">
+              Please enter the capacity of the residence
+            </div>
+          </div>
+        </div>
+        <div class="position-relative form-group">
+          <span>Select Region</span>
+          <select
+            data-max-options="1"
+            class="form-select form-control"
+            id="governorateDropdown"
+            name="region"
+            [(ngModel)]="foyer.region"
+            [ngClass]="{ 'is-invalid': submitted && form.region.errors }"
+          >
+            <option
+              *ngFor="let governorate of governoratelist"
+              [value]="governorate"
+            >
+              {{ governorate }}
+            </option>
+          </select>
+          <div *ngIf="submitted && form.region.errors" class="invalid-feedback">
+            <div *ngIf="form.region.errors.required">
+              Please select the region of the residence
+            </div>
+          </div>
+        </div>
+        <div
+          class="position-relative form-group text-center d-flex justify-content-center"
+        >
+          <div class=" ">
+            <div
+              style="height: 400px; width: 700px"
+              class="map-container"
+              leaflet
+              [leafletOptions]="options"
+              (leafletMapReady)="onMapReady($event)"
+              (leafletClick)="mapClicked($event)"
+            ></div>
+            {{ streetName }}
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg mr-2">
+          Edit residence
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <app-footer></app-footer>
+  </div>
+</div>
