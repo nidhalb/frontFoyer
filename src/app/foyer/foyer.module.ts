@@ -15,7 +15,11 @@ import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
-import { FoyerMapComponent } from './foyer-map/foyer-map.component';
+import { FoyerMapComponent } from "./foyer-map/foyer-map.component";
+import { LatLngToAddressPipe } from "./LatLngToAddressPipe";
+import { FoyerDeleteConfirmationComponent } from "./foyer-delete-confirmation/foyer-delete-confirmation.component";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     FoyerComponent,
@@ -23,6 +27,8 @@ import { FoyerMapComponent } from './foyer-map/foyer-map.component';
     FoyerListComponent,
     FoyerEditComponent,
     FoyerMapComponent,
+    LatLngToAddressPipe,
+    FoyerDeleteConfirmationComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +41,8 @@ import { FoyerMapComponent } from './foyer-map/foyer-map.component';
     MatTableModule,
     MatSortModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    NgbModule
   ],
 })
 export class FoyerModule {}

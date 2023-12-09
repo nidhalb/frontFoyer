@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { Foyer } from "src/app/models/foyer.model";
 import { FoyerManagementService } from "src/app/services/foyer-management.service";
 import { FoyerMapComponent } from "../foyer-map/foyer-map.component";
+import { FoyerDeleteConfirmationComponent } from "../foyer-delete-confirmation/foyer-delete-confirmation.component";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-foyer-list",
@@ -46,7 +48,9 @@ export class FoyerListComponent implements OnInit {
 
   constructor(
     private foyerService: FoyerManagementService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -99,5 +103,20 @@ export class FoyerListComponent implements OnInit {
     this.page = event.pageIndex;
     this.size = event.pageSize;
     this.getAllFoyers();
+  }
+  openConfirmationModal(foyerId: number): void {
+    const modalRef = this.modalService.open(
+      FoyerDeleteConfirmationComponent,
+      {}
+    );
+    modalRef.componentInstance.confirmed.subscribe(() => {
+      this.foyerService.deleteFoyer(foyerId).subscribe({
+        next: (response) => this.router.navigate(["/foyer"]),
+        error: (error) => console.log("error"),
+      });
+      this.router.navigate([''], { relativeTo: this.route.parent });
+    });
+
+    modalRef.componentInstance.canceled.subscribe(() => {});
   }
 }

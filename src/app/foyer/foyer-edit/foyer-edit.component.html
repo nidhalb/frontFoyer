@@ -3,6 +3,9 @@
 
 <div class="main-content">
   <div class="container main-card mb-3 p-5 card col-8">
+    <button class="btn btn-primary w-25" routerLink="/foyer">
+      Go back to list
+    </button>
     <div class="card-body">
       <h5 class="card-title">Edit residence</h5>
       <form [formGroup]="residenceForm" (ngSubmit)="onSubmit()">
@@ -89,7 +92,9 @@
               (leafletMapReady)="onMapReady($event)"
               (leafletClick)="mapClicked($event)"
             ></div>
-            {{ streetName }}
+            <p>
+              {{ foyer.lattitude | latLngToAddress : foyer.longitude | async }}
+            </p>
           </div>
         </div>
 

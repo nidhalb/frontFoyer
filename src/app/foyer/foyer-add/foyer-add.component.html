@@ -3,6 +3,9 @@
 
 <div class="main-content">
   <div class="container main-card mb-3 p-5 card col-8">
+    <button class="btn btn-primary w-25" routerLink="/foyer">
+      Go back to list
+    </button>
     <div class="card-body">
       <h5 class="card-title">Add new residence</h5>
       <form [formGroup]="residenceForm" (ngSubmit)="onSubmit()">
@@ -77,8 +80,11 @@
             </div>
           </div>
         </div>
-        <div class="position-relative form-group text-center d-flex justify-content-center ">
-          <div class=" ">
+        <div
+          class="position-relative form-group text-center d-flex justify-content-center"
+        >
+          <div class="position-relative form-group">
+            <span>Select Exact Location</span>
             <div
               style="height: 400px; width: 700px"
               class="map-container"
@@ -90,7 +96,11 @@
             {{ streetName }}
           </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg mr-2">
+        <button
+          type="submit"
+          class="btn btn-primary btn-lg mr-2"
+          [disabled]="residenceForm.invalid"
+        >
           Add residence
         </button>
       </form>

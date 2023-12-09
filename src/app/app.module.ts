@@ -15,6 +15,7 @@ import { ComponentsModule } from "./components/components.module";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { MapsComponent } from "./pages/maps/maps.component";
+import { ConfirmDeleteDirective } from './confirm-delete.directive';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -27,7 +28,7 @@ import { MapsComponent } from "./pages/maps/maps.component";
     LeafletModule,
     ReactiveFormsModule
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
+  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, ConfirmDeleteDirective],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,3 +1,4 @@
+import { Bloc } from "./bloc.model";
 import { Universite } from "./universite.model";
 
 export class Foyer {
@@ -8,4 +9,6 @@ export class Foyer {
   universite: Universite;
   lattitude: number;
   longitude: number;
+  blocs: Bloc[];
+
 }

@@ -1,12 +1,14 @@
-<div class="container ">
-  <div class="container-fluid">
+<div class="container col-12">
+  <div class="container">
     <div
-      style="height: 400px; width: 700px"
+      style="height: 250px; width: 300px"
       class="map-container"
       leaflet
       [leafletOptions]="options"
       (leafletMapReady)="onMapReady($event)"
     ></div>
-    <span>{{ streetName }}</span>
+    <p>
+      {{ foyerLocation.lat | latLngToAddress : foyerLocation.lng | async }}
+    </p>
   </div>
 </div>

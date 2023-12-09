@@ -2,13 +2,14 @@ import { Component, Input, OnInit } from "@angular/core";
 import * as L from "leaflet";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import { Foyer } from "src/app/models/foyer.model";
 @Component({
   selector: "app-foyer-map",
   templateUrl: "./foyer-map.component.html",
   styleUrls: ["./foyer-map.component.scss"],
 })
 export class FoyerMapComponent implements OnInit {
-  @Input() foyerLocation: { lat: number; lng: number };
+  @Input() foyerLocation: { lat: number; lng: number};
   map!: L.Map;
   marker: L.Marker;
   streetName: string = "";
@@ -19,14 +20,6 @@ export class FoyerMapComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.getAddress(this.foyerLocation.lat, this.foyerLocation.lng).subscribe({
-      next: (data) => {
-        this.streetName = data.display_name;
-        console.log(this.streetName);
-      },
-      error: (error) => console.log("error fetching localisation", error),
-    });
-    console.log(this.foyerLocation);
   }
   icon = {
     icon: L.icon({

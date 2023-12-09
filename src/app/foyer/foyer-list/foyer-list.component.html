@@ -162,6 +162,14 @@
                 </div> -->
               </div>
             </form>
+            <div>
+              <button
+                class="btn btn-primary w-10 form-group col-md-2"
+                routerLink="/foyer/add"
+              >
+                Add new residence
+              </button>
+            </div>
           </div>
           <div class="table-responsive">
             <table class="table align-items-center table-flush">
@@ -172,8 +180,8 @@
                   <th scope="col">Number of bloc</th>
                   <th scope="col">Status</th>
                   <th scope="col">Capacity</th>
-                  <th scope="col">Location</th>
-                  <th scope="col"></th>
+                  <th scope="col">Action</th>
+                  <th scope="col">Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -190,16 +198,29 @@
                         />
                       </a>
                       <div class="media-body">
-                        <span class="mb-0 text-sm">{{ foyer.nomFoyer }}</span>
+                        <span class="mb-0 text-sm">
+                          <a
+                            href=""
+                            routerLink="/foyer/edit/{{ foyer.idFoyer }}"
+                            >{{ foyer.nomFoyer }}</a
+                          ></span
+                        >
                       </div>
                     </div>
                   </th>
                   <td>{{ foyer.region }}</td>
                   <td>{{ foyer.capacityFoyer }}</td>
                   <td>
-                    <span class="badge badge-dot mr-4">
-                      <i class="bg-warning"></i> pending
-                    </span>
+                    <div *ngIf="foyer.capacityFoyer >= 100">
+                      <span class="badge badge-dot mr-4">
+                        <i class="bg-warning"></i> Full
+                      </span>
+                    </div>
+                    <div *ngIf="foyer.capacityFoyer < 100">
+                      <span class="badge badge-dot mr-4">
+                        <i class="bg-green"></i> Not full
+                      </span>
+                    </div>
                   </td>
                   <td>
                     <div class="d-flex align-items-center">
@@ -232,14 +253,14 @@
                       >
                         <a
                           class="dropdown-item"
-                          routerLink="/foyer/edit/{{ foyer.idFoyer }}"
-                          >Edit</a
-                        >
-                        <a class="dropdown-item" (click)="openMapPopup(this.foyer)"
+                          (click)="openMapPopup(this.foyer)"
                           >See location on maps</a
                         >
                       </div>
                     </div>
+                  </td>
+                  <td>
+                    <button  class="btn btn-danger" (click)="openConfirmationModal(foyer.idFoyer)">Delete</button>
                   </td>
                 </tr>
               </tbody>

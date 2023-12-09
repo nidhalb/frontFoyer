@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import {
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -59,16 +60,46 @@ export class FoyerAddComponent implements OnInit {
   ngOnInit(): void {
     this.formList();
   }
+
+  // formList() {
+  //   this.residenceForm = this.formbuilder.group({
+  //     nomFoyer: new FormControl(this.residenceForm, [
+  //       Validators.required,
+  //       Validators.minLength(3),
+  //     ]),
+  //     capacityFoyer: new FormControl(this.residenceForm, [Validators.required]),
+  //     region: new FormControl(this.residenceForm, [Validators.required]),
+  //     blocs: this.formbuilder.array([])
+  //   });
+  // }
   formList() {
-    this.residenceForm = new FormGroup({
-      nomFoyer: new FormControl(this.residenceForm, [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
-      capacityFoyer: new FormControl(this.residenceForm, [Validators.required]),
-      region: new FormControl(this.residenceForm, [Validators.required]),
+    this.residenceForm = this.formbuilder.group({
+      nomFoyer: ["", [Validators.required, Validators.minLength(3)]],
+      capacityFoyer: ["", [Validators.required]],
+      region: ["", [Validators.required]],
+      latitude: [""],
+      longitude: [""],
+      blocs: this.formbuilder.array([]),
     });
   }
+
+  addBloc() {
+    const newBlocForm = this.formbuilder.group({
+      nomBloc: ["", [Validators.required]],
+      capaciteBloc: ["", [Validators.required]],
+    });
+
+    this.blocs.push(newBlocForm);
+  }
+
+  removeBloc(index: number) {
+    this.blocs.removeAt(index);
+  }
+
+  get blocs(): FormArray {
+    return this.residenceForm.get("blocs") as FormArray;
+  }
+
   addFoyer() {
     this.service.addFoyer(this.foyer).subscribe({
       next: (data) => console.log("added"),
@@ -148,7 +179,7 @@ export class FoyerAddComponent implements OnInit {
         this.foyer.longitude = $event.latlng.lng;
         console.log(this.streetName);
       },
-      error: (error) => console.log("error fetching localisation",error),
+      error: (error) => console.log("error fetching localisation", error),
     });
     const marker = this.generateMarker($event);
     this.marker = marker!;
