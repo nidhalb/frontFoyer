@@ -69,7 +69,7 @@ export class FoyerListComponent implements OnInit {
     this.filterForm = new FormGroup({
       regionFilter: new FormControl("Filter By governates: All"),
       nameFilter: new FormControl(),
-      ratingFilter: new FormControl("All"),
+      ratingFilter: new FormControl("highest"),
     });
   }
   getAllFoyers(): void {
@@ -119,13 +119,12 @@ export class FoyerListComponent implements OnInit {
     //       );
     //   }
     // }
-    if (ratingFilterValue != "All") {
       if (ratingFilterValue.toLowerCase() === "highest") {
         filteredDataByRegionOrNameOrRate.sort((a, b) => b.rating - a.rating);
       } else if (ratingFilterValue.toLowerCase() === "least") {
         filteredDataByRegionOrNameOrRate.sort((a, b) => a.rating - b.rating);
       }
-    }
+    
 
     return filteredDataByRegionOrNameOrRate;
   }

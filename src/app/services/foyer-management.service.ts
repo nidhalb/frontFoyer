@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable, catchError, throwError } from "rxjs";
 import { Foyer } from "src/app/models/foyer.model";
+import { Rate } from "../models/rate.model";
 
 @Injectable({
   providedIn: "root",
@@ -69,8 +70,10 @@ export class FoyerManagementService {
 
     return this.http.get(`${this.apiUrl}/get`, { params });
   }
-  stars: number[] = [1, 2, 3, 4, 5];
-
+  addRatingForFoyer(rating: Rate, foyerId: number): Observable<Rate> {
+    const url = `${this.apiUrl}/addRatingForFoyer/${foyerId}`;
+    return this.http.post<Rate>(url, rating);
+  }
   calculateAverageRate(foyerId: number): Observable<number> {
     const url = `${this.apiUrl}/getRating/${foyerId}`;
     return this.http.get<number>(url);
