@@ -130,6 +130,16 @@
             <form [formGroup]="filterForm">
               <div class="d-flex">
                 <div class="form-group col-md-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nameFilter"
+                    name="nameFilter"
+                    formControlName="nameFilter"
+                    placeholder="Search by Name"
+                  />
+                </div>
+                <div class="form-group col-md-4">
                   <select
                     data-max-options="1"
                     class="form-select form-control"
@@ -146,14 +156,15 @@
                   </select>
                 </div>
                 <div class="form-group col-md-4">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="nameFilter"
-                    name="nameFilter"
-                    formControlName="nameFilter"
-                    placeholder="Search by Name"
-                  />
+                  <select
+                    class="form-select form-control"
+                    id="ratingFilter"
+                    formControlName="ratingFilter"
+                  >
+                    <option value="All">Filter By ratings: All</option>
+                    <option value="highest">Highest</option>
+                    <option value="least">Least</option>
+                  </select>
                 </div>
                 <!-- <div class="form-group col-md-2">
                   <button type="button" class="btn btn-primary">
@@ -181,6 +192,7 @@
                   <th scope="col">Status</th>
                   <th scope="col">Capacity</th>
                   <th scope="col">Action</th>
+                  <th scope="col">Rating</th>
                   <th scope="col">Delete</th>
                 </tr>
               </thead>
@@ -260,7 +272,19 @@
                     </div>
                   </td>
                   <td>
-                    <button  class="btn btn-danger" (click)="openConfirmationModal(foyer.idFoyer)">Delete</button>
+                    <star-rating
+                      [starType]="'svg'"
+                      [rating]="foyer.rating"
+                      [readOnly]="true"
+                    ></star-rating>
+                  </td>
+                  <td>
+                    <button
+                      class="btn btn-danger"
+                      (click)="openConfirmationModal(foyer.idFoyer)"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               </tbody>

@@ -69,4 +69,10 @@ export class FoyerManagementService {
 
     return this.http.get(`${this.apiUrl}/get`, { params });
   }
+  stars: number[] = [1, 2, 3, 4, 5];
+
+  calculateAverageRate(foyerId: number): Observable<number> {
+    const url = `${this.apiUrl}/getRating/${foyerId}`;
+    return this.http.get<number>(url);
+  }
 }

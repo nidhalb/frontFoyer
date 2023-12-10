@@ -10,5 +10,5 @@ export class Foyer {
   lattitude: number;
   longitude: number;
   blocs: Bloc[];
-
+  rating: number;
 }

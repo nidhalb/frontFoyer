@@ -19,7 +19,7 @@ import { FoyerMapComponent } from "./foyer-map/foyer-map.component";
 import { LatLngToAddressPipe } from "./LatLngToAddressPipe";
 import { FoyerDeleteConfirmationComponent } from "./foyer-delete-confirmation/foyer-delete-confirmation.component";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import { StarRatingModule } from "angular-star-rating";
 @NgModule({
   declarations: [
     FoyerComponent,
@@ -42,7 +42,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatSortModule,
     MatInputModule,
     MatSelectModule,
-    NgbModule
+    NgbModule,
+    StarRatingModule.forRoot(),
+
   ],
 })
 export class FoyerModule {}

@@ -16,6 +16,8 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
 import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { MapsComponent } from "./pages/maps/maps.component";
 import { ConfirmDeleteDirective } from './confirm-delete.directive';
+import { StarRatingModule } from 'angular-star-rating';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -26,7 +28,9 @@ import { ConfirmDeleteDirective } from './confirm-delete.directive';
     RouterModule,
     AppRoutingModule,
     LeafletModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StarRatingModule.forRoot(),
+
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, ConfirmDeleteDirective],
   providers: [],

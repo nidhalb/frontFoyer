@@ -18,7 +18,7 @@ export class FoyerListComponent implements OnInit {
   size = 5;
   data: any;
   governoratelist = [
-    "All",
+    "Filter By governates: All",
     "Ariana",
     "Beja",
     "Ben Arous",
@@ -67,8 +67,9 @@ export class FoyerListComponent implements OnInit {
   }
   formList() {
     this.filterForm = new FormGroup({
-      regionFilter: new FormControl("All"),
+      regionFilter: new FormControl("Filter By governates: All"),
       nameFilter: new FormControl(),
+      ratingFilter: new FormControl("All"),
     });
   }
   getAllFoyers(): void {
@@ -76,28 +77,57 @@ export class FoyerListComponent implements OnInit {
       next: (data: any) => {
         this.data = data;
         this.foyers = data.content;
+        this.calculateAverageRating();
       },
       error: (error) => console.log("error getting list", error),
     });
   }
   get filteredFoyers() {
-    let filteredDataByRegionOrName = this.foyers;
-    if (this.filterForm.get("regionFilter").value != "All") {
-      console.log("true");
-      filteredDataByRegionOrName = filteredDataByRegionOrName.filter(
-        (foyer) =>
-          foyer.region.toLowerCase() ===
-          this.filterForm.get("regionFilter").value.toLowerCase()
-      );
+    let filteredDataByRegionOrNameOrRate = this.foyers;
+    if (
+      this.filterForm.get("regionFilter").value != "Filter By governates: All"
+    ) {
+      filteredDataByRegionOrNameOrRate =
+        filteredDataByRegionOrNameOrRate.filter(
+          (foyer) =>
+            foyer.region.toLowerCase() ===
+            this.filterForm.get("regionFilter").value.toLowerCase()
+        );
     }
     if (this.filterForm.get("nameFilter").value) {
-      filteredDataByRegionOrName = filteredDataByRegionOrName.filter((foyer) =>
-        foyer.nomFoyer
-          .toLowerCase()
-          .includes(this.filterForm.get("nameFilter").value.toLowerCase())
-      );
+      filteredDataByRegionOrNameOrRate =
+        filteredDataByRegionOrNameOrRate.filter((foyer) =>
+          foyer.nomFoyer
+            .toLowerCase()
+            .includes(this.filterForm.get("nameFilter").value.toLowerCase())
+        );
     }
-    return filteredDataByRegionOrName;
+    const ratingFilterValue = this.filterForm.get("ratingFilter").value;
+
+    // if (ratingFilterValue != "All") {
+    //   if (ratingFilterValue.toLowerCase() === "highest") {
+    //     filteredDataByRegionOrNameOrRate =
+    //       filteredDataByRegionOrNameOrRate.filter(
+    //         (foyer) =>
+    //           foyer.rating === Math.max(...this.foyers.map((f) => f.rating))
+    //       );
+    //   } else if (ratingFilterValue.toLowerCase() === "least") {
+    //     filteredDataByRegionOrNameOrRate =
+    //       filteredDataByRegionOrNameOrRate.filter(
+    //         (foyer) =>
+    //           foyer.rating === Math.min(...this.foyers.map((f) => f.rating))
+    //       );
+    //   }
+    // }
+    if (ratingFilterValue != "All") {
+      if (ratingFilterValue.toLowerCase() === "highest") {
+        filteredDataByRegionOrNameOrRate.sort((a, b) => b.rating - a.rating);
+      } else if (ratingFilterValue.toLowerCase() === "least") {
+        filteredDataByRegionOrNameOrRate.sort((a, b) => a.rating - b.rating);
+      }
+    }
+
+    return filteredDataByRegionOrNameOrRate;
   }
   onPageChanged(event: any) {
     this.page = event.pageIndex;
@@ -114,9 +144,23 @@ export class FoyerListComponent implements OnInit {
         next: (response) => this.router.navigate(["/foyer"]),
         error: (error) => console.log("error"),
       });
-      this.router.navigate([''], { relativeTo: this.route.parent });
+      this.router.navigate([""], { relativeTo: this.route.parent });
     });
 
     modalRef.componentInstance.canceled.subscribe(() => {});
+  }
+  calculateAverageRating() {
+    for (const foyer of this.foyers) {
+      this.foyerService.calculateAverageRate(foyer.idFoyer).subscribe({
+        next: (rating: number) => {
+          foyer.rating = rating;
+        },
+        error: (error) =>
+          console.error(
+            `Error calculating average rate for Foyer ${foyer.idFoyer}`,
+            error
+          ),
+      });
+    }
   }
 }
