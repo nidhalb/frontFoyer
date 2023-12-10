@@ -70,6 +70,11 @@ export class FoyerManagementService {
 
     return this.http.get(`${this.apiUrl}/get`, { params });
   }
+
+  countBlocByFoyer(foyerId: number): Observable<number> {
+    const url = `${this.apiUrl}/countBloc/${foyerId}`;
+    return this.http.get<number>(url);
+  }
   addRatingForFoyer(rating: Rate, foyerId: number): Observable<Rate> {
     const url = `${this.apiUrl}/addRatingForFoyer/${foyerId}`;
     return this.http.post<Rate>(url, rating);
@@ -77,5 +82,9 @@ export class FoyerManagementService {
   calculateAverageRate(foyerId: number): Observable<number> {
     const url = `${this.apiUrl}/getRating/${foyerId}`;
     return this.http.get<number>(url);
+  }
+  getRatingsByFoyer(foyerId: number): Observable<Rate[]> {
+    const url = `${this.apiUrl}/getRatingByFoyer/${foyerId}`;
+    return this.http.get<any>(url);
   }
 }

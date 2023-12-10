@@ -78,9 +78,22 @@ export class FoyerListComponent implements OnInit {
         this.data = data;
         this.foyers = data.content;
         this.calculateAverageRating();
+        this.countBlocForFoyer();
       },
       error: (error) => console.log("error getting list", error),
     });
+  }
+
+  countBlocForFoyer() {
+    for (const foyer of this.foyers) {
+      this.foyerService.countBlocByFoyer(foyer.idFoyer).subscribe({
+        next: (nb: number) => {
+          foyer.numberBloc = nb;
+        },
+        error: (error) =>
+          console.error(`Error calculating for Foyer ${foyer.idFoyer}`, error),
+      });
+    }
   }
   get filteredFoyers() {
     let filteredDataByRegionOrNameOrRate = this.foyers;
@@ -119,12 +132,11 @@ export class FoyerListComponent implements OnInit {
     //       );
     //   }
     // }
-      if (ratingFilterValue.toLowerCase() === "highest") {
-        filteredDataByRegionOrNameOrRate.sort((a, b) => b.rating - a.rating);
-      } else if (ratingFilterValue.toLowerCase() === "least") {
-        filteredDataByRegionOrNameOrRate.sort((a, b) => a.rating - b.rating);
-      }
-    
+    if (ratingFilterValue.toLowerCase() === "highest") {
+      filteredDataByRegionOrNameOrRate.sort((a, b) => b.rating - a.rating);
+    } else if (ratingFilterValue.toLowerCase() === "least") {
+      filteredDataByRegionOrNameOrRate.sort((a, b) => a.rating - b.rating);
+    }
 
     return filteredDataByRegionOrNameOrRate;
   }

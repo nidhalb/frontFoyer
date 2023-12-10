@@ -220,7 +220,7 @@
                     </div>
                   </th>
                   <td>{{ foyer.region }}</td>
-                  <td>{{ foyer.capacityFoyer }}</td>
+                  <td>{{ foyer.numberBloc }}</td>
                   <td>
                     <div *ngIf="foyer.capacityFoyer >= 100">
                       <span class="badge badge-dot mr-4">
@@ -271,11 +271,15 @@
                     </div>
                   </td>
                   <td>
-                    <star-rating
-                      [starType]="'svg'"
-                      [rating]="foyer.rating"
-                      [readOnly]="true"
-                    ></star-rating>
+                    <div class="d-flex">
+                      <a routerLink="/foyer/{{ foyer.idFoyer }}/ratings">
+                        <star-rating
+                          [starType]="'svg'"
+                          [rating]="foyer.rating"
+                          [readOnly]="true"
+                        ></star-rating>
+                      </a>
+                    </div>
                   </td>
                   <td>
                     <button

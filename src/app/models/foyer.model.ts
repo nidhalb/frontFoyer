@@ -9,6 +9,7 @@ export class Foyer {
   universite: Universite;
   lattitude: number;
   longitude: number;
+  numberBloc:number;
   blocs: Bloc[];
   rating: number;
 }

@@ -20,6 +20,7 @@ import { LatLngToAddressPipe } from "./LatLngToAddressPipe";
 import { FoyerDeleteConfirmationComponent } from "./foyer-delete-confirmation/foyer-delete-confirmation.component";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { StarRatingModule } from "angular-star-rating";
+import { FoyerRatingComponent } from './foyer-rating/foyer-rating.component';
 @NgModule({
   declarations: [
     FoyerComponent,
@@ -29,6 +30,7 @@ import { StarRatingModule } from "angular-star-rating";
     FoyerMapComponent,
     LatLngToAddressPipe,
     FoyerDeleteConfirmationComponent,
+    FoyerRatingComponent,
   ],
   imports: [
     CommonModule,
