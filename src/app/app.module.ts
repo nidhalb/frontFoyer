@@ -24,7 +24,7 @@ import { ComponentsModule } from './components/components.module';
     ComponentsModule,
     NgbModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   declarations: [
     AppComponent,

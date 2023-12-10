@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>{{title}} :</h2>
+
+<mat-dialog-content [formGroup]="form">
+
+    <mat-form-field>
+        <input required matInput placeholder="Nom" formControlName="nomBloc" />
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <input required type="number" matInput placeholder="Capacite" formControlName="capaciteBloc" />
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+        <mat-label>Foyer</mat-label>
+        <input type="text"
+               placeholder="Pick one"
+               aria-label="Foyer"
+               required
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button (click)="close()">Close</button>
+    <button mat-raised-button class="btn-primary" (click)="save()">Save</button>
+</mat-dialog-actions>
