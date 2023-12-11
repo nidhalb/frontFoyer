@@ -1,0 +1,67 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row">
+                <div class=" col-3 text-right mt-2">
+                    <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </div>
+                        <input [(ngModel)]="searchInput" placeholder="Search" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col text-right mt-2">
+                    <button class="btn btn btn-primary" (click)="addBloc()">Add Bloc</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--7">
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="table-responsive card">
+                    <table class="table align-middle mb-0 bg-white">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Nom</th>
+                                <th>Capacite</th>
+                                <th>Foyer</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let bloc of handleSearch(searchInput)">
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="ms-3">
+                                            <p class="fw-bold mb-1">{{ bloc.nomBloc }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="fw-normal mb-1">{{ bloc.capaciteBloc }}</p>
+                                </td>
+                                <td>
+                                    <p class="fw-normal mb-1">{{bloc.foyer? bloc.foyer.nomFoyer : '' }}</p>
+                                </td>
+                                <td>
+                                    <button type="button" class="fw-normal mb-1 btn btn-link btn-sm btn-rounded" (click)="editBloc(bloc)">
+                                        Edit
+                                    </button>
+                                    <button type="button" class="fw-normal mb-1 btn btn-danger btn-sm btn-rounded" (click)="deleteBloc(bloc.idBloc)">
+                                        delete
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

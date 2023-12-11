@@ -9,6 +9,16 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 
 const routes: Routes =[
   {
+    path: 'bloc',
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('src/app/pages/bloc/bloc.module').then(m => m.BlocModule)
+      }
+    ]
+  },
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',
