@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import {
   FormArray,
   FormBuilder,
@@ -11,17 +11,21 @@ import { Foyer } from "src/app/models/foyer.model";
 import { FoyerManagementService } from "src/app/services/foyer-management.service";
 import * as L from "leaflet";
 import { Observable } from "rxjs";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-foyer-add",
   templateUrl: "./foyer-add.component.html",
   styleUrls: ["./foyer-add.component.scss"],
+  encapsulation: ViewEncapsulation.None 
+
 })
 export class FoyerAddComponent implements OnInit {
   constructor(
     private service: FoyerManagementService,
     private formbuilder: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private toastrService: ToastrService
   ) {}
 
   residenceForm: FormGroup;
@@ -60,26 +64,25 @@ export class FoyerAddComponent implements OnInit {
   ngOnInit(): void {
     this.formList();
   }
+  public showSuccess(): void {
+    this.toastrService.success("Residence Added Successfully!");
+  }
+  successMessage: string | null = null;
+  showSuccessAlert(message: string): void {
+    this.successMessage = message;
+    setTimeout(() => {
+      this.successMessage = null;
+    }, 5000); 
+  }
 
-  // formList() {
-  //   this.residenceForm = this.formbuilder.group({
-  //     nomFoyer: new FormControl(this.residenceForm, [
-  //       Validators.required,
-  //       Validators.minLength(3),
-  //     ]),
-  //     capacityFoyer: new FormControl(this.residenceForm, [Validators.required]),
-  //     region: new FormControl(this.residenceForm, [Validators.required]),
-  //     blocs: this.formbuilder.array([])
-  //   });
-  // }
   formList() {
-    this.residenceForm = this.formbuilder.group({
-      nomFoyer: ["", [Validators.required, Validators.minLength(3)]],
-      capacityFoyer: ["", [Validators.required]],
-      region: ["", [Validators.required]],
-      latitude: [""],
-      longitude: [""],
-      blocs: this.formbuilder.array([]),
+    this.residenceForm = new FormGroup({
+      nomFoyer: new FormControl(this.residenceForm, [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      capacityFoyer: new FormControl(this.residenceForm, [Validators.required]),
+      region: new FormControl(this.residenceForm, [Validators.required]),
     });
   }
 
@@ -111,9 +114,12 @@ export class FoyerAddComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
-    console.log(this.foyer);
-
-    this.addFoyer();
+    if (this.residenceForm.valid) {
+      this.addFoyer();
+      // this.showSuccess();
+      this.showSuccessAlert("Residence added successfully!");
+      this.residenceForm.reset();
+    }
   }
 
   private apiUrl = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&";

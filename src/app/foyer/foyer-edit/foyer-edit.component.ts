@@ -6,6 +6,7 @@ import { FoyerManagementService } from "src/app/services/foyer-management.servic
 import * as L from "leaflet";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import { ToastrService } from "ngx-toastr";
 @Component({
   selector: "app-foyer-edit",
   templateUrl: "./foyer-edit.component.html",
@@ -15,7 +16,8 @@ export class FoyerEditComponent implements OnInit, AfterViewInit {
   constructor(
     private service: FoyerManagementService,
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private toastrService: ToastrService
   ) {}
   ngAfterViewInit(): void {}
   residenceForm: FormGroup;
@@ -70,7 +72,6 @@ export class FoyerEditComponent implements OnInit, AfterViewInit {
       });
     });
 
-    console.log(this.foyer);
     // this.sMarkersLayer.addLayer(marker);
     // this.markersLayer.addLayer(this.sMarkersLayer);
     // this.map.panTo([this.foyer.lattitude, this.foyer.longitude]);
@@ -97,7 +98,9 @@ export class FoyerEditComponent implements OnInit, AfterViewInit {
 
   markersLayer = new L.LayerGroup();
   markerAdded = false;
-
+  public showSuccess(): void {
+    this.toastrService.success("Residence Edited Successfully!");
+  }
   onMapReady(map: L.Map) {
     setTimeout(() => {
       map.invalidateSize();
@@ -179,7 +182,9 @@ export class FoyerEditComponent implements OnInit, AfterViewInit {
   }
   onSubmit() {
     this.submitted = true;
-    console.log(this.foyer);
-    this.editFoyer();
+    if (this.residenceForm.valid) {
+      this.editFoyer();
+      this.showSuccess();
+    }
   }
 }

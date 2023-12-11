@@ -134,7 +134,7 @@
       </form>
       <!-- Navigation -->
       <ul class="navbar-nav">
-        <li
+        <!-- <li
           *ngFor="let menuItem of menuItems"
           class="{{ menuItem.class }} nav-item"
         >
@@ -145,6 +145,13 @@
           >
             <i class="ni {{ menuItem.icon }}"></i>
             {{ menuItem.title }}
+          </a>
+        </li> -->
+
+        <li class="nav-item">
+          <a routerLinkActive="active" routerLink="/foyer" class="nav-link">
+            <i class="ni"></i>
+            Residence Management
           </a>
         </li>
       </ul>

@@ -17,6 +17,7 @@ import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { MapsComponent } from "./pages/maps/maps.component";
 import { ConfirmDeleteDirective } from './confirm-delete.directive';
 import { StarRatingModule } from 'angular-star-rating';
+import { ToastrModule } from "ngx-toastr";
 
 @NgModule({
   imports: [
@@ -30,6 +31,11 @@ import { StarRatingModule } from 'angular-star-rating';
     LeafletModule,
     ReactiveFormsModule,
     StarRatingModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 15000, // 15 seconds
+      closeButton: true,
+      progressBar: true,
+    }),
 
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, ConfirmDeleteDirective],

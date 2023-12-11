@@ -18,9 +18,11 @@ import { MatSelectModule } from "@angular/material/select";
 import { FoyerMapComponent } from "./foyer-map/foyer-map.component";
 import { LatLngToAddressPipe } from "./LatLngToAddressPipe";
 import { FoyerDeleteConfirmationComponent } from "./foyer-delete-confirmation/foyer-delete-confirmation.component";
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { StarRatingModule } from "angular-star-rating";
-import { FoyerRatingComponent } from './foyer-rating/foyer-rating.component';
+import { FoyerRatingComponent } from "./foyer-rating/foyer-rating.component";
+import { ToastrModule } from "ngx-toastr";
+
 @NgModule({
   declarations: [
     FoyerComponent,
@@ -46,7 +48,11 @@ import { FoyerRatingComponent } from './foyer-rating/foyer-rating.component';
     MatSelectModule,
     NgbModule,
     StarRatingModule.forRoot(),
-
+    ToastrModule.forRoot({
+      timeOut: 15000, // 15 seconds
+      closeButton: true,
+      progressBar: true,
+    }),
   ],
 })
 export class FoyerModule {}

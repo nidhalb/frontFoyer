@@ -96,11 +96,10 @@
             {{ streetName }}
           </div>
         </div>
-        <button
-          type="submit"
-          class="btn btn-primary btn-lg mr-2"
-          [disabled]="residenceForm.invalid"
-        >
+        <div *ngIf="successMessage" appAlert type="success" class="alert-success">
+          {{ successMessage }}
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg mr-2">
           Add residence
         </button>
       </form>
