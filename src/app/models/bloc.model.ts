@@ -4,7 +4,8 @@ export class Bloc {
     idBloc: number;
     nomBloc: string;
     capaciteBloc: number;
-    chamberList: chamber[]
+    chamberList: chamber[];
+    ActiveCapasity: number
   
     constructor(idBloc: number, nomBloc: string, capaciteBloc: number) {
       this.idBloc = idBloc;
