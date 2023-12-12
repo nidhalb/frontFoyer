@@ -12,4 +12,5 @@ export class Foyer {
   numberBloc:number;
   blocs: Bloc[];
   rating: number;
+  blocList: Bloc[]
 }

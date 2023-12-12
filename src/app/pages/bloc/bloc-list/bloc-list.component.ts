@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Bloc } from "src/app/models/Bloc";
+import { Bloc } from "src/app/models/bloc";
 import { BlocService } from "src/app/services/bloc.service";
 import { BlocAddDialogComponent } from "../bloc-add-dialog/bloc-add-dialog.component";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";

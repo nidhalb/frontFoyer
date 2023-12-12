@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Observable, map, startWith } from "rxjs";
-import { Foyer } from "src/app/models/Foyer";
+import { Foyer } from "src/app/models/foyer.model";
 import { FoyerService } from "src/app/services/foyer.service";
 
 @Component({

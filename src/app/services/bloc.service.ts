@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Bloc } from '../models/Bloc';
+import { Bloc } from '../models/bloc';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
 
@@ -7,12 +7,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class BlocService {
-  private baseUrl = 'http://localhost:8081/tpFoyer/bloc'
+  private baseUrl = 'http://localhost:8089/foyerProject/bloc'
 
   constructor(private http: HttpClient) { }
 
   getAllBlocs(): Observable<Bloc[]> {
-    return this.http.get<Bloc[]>(`${this.baseUrl}/getAll`);
+    return this.http.get<Bloc[]>(`${this.baseUrl}/get`);
   }
 
   addBloc(bloc: Bloc): Observable<Bloc> {
@@ -20,7 +20,7 @@ export class BlocService {
   }
 
   updateBloc(bloc: Bloc): Observable<Bloc> {
-    return this.http.put<Bloc>(`${this.baseUrl}/update`, bloc);
+    return this.http.put<Bloc>(`${this.baseUrl}/edit`, bloc);
   }
 
   deleteBloc(idBloc: number): Observable<void> {

@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
 import { chamber } from '../models/chambre';
 import { universite } from '../models/universite';
-import { Foyer } from '../models/Foyer';
 import { User } from '../models/user.model';
+import { Foyer } from '../models/foyer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +57,7 @@ export class ReservationService {
   }
 
   getAllEtudiants(): Observable<User[]> {
-    return this.http.get<User[]>("http://localhost:8089/foyerProject/etudiant/getEd");
+    return this.http.get<User[]>("http://localhost:8089/foyerProject/etudiant/getEt");
   }
 
   getNumberEtudiantForChambrebyChambre(idChambre: number): Observable<number> {

@@ -1,5 +1,5 @@
-import { Foyer } from "./Foyer";
 import { chamber } from "./chambre";
+import { Foyer } from "./foyer.model";
 
 
 export interface Bloc {

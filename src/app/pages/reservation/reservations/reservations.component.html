@@ -112,12 +112,12 @@
                 <td>
                   <div class="d-flex align-items-center">
                     <div class="ms-3">
-                      <p class="fw-bold mb-1">{{ reservation.etudiantList[0].nomEt }} {{ reservation.etudiantList[0].prenomET }}</p>
+                      <p class="fw-bold mb-1">{{ reservation.userList[0].nom }} {{ reservation.userList[0].prenom }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <p class="fw-normal mb-1">{{ reservation.etudiantList[0].cin }}</p>
+                  <p class="fw-normal mb-1">{{ reservation.userList[0].cin }}</p>
                 </td>
                 <td>
                   <span *ngIf="reservation.state==='CONFIRMED'" class="badge badge-success rounded-pill d-inline">Confirmed</span>

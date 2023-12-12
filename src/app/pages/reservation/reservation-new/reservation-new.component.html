@@ -106,7 +106,7 @@
         <div class="col-3">
           Foyer
           <div>
-            <button *ngIf="foyer != null" class="btn btn-primary m-2">{{ foyer.nomFoyer }}</button>
+            <button *ngIf="foyer != null" class="btn btn-primary m-2">{{ foyer.nomFoyer  }}</button>
           </div>
         </div>
         <div class="col-3">
@@ -130,9 +130,11 @@
       </div>
       <form [formGroup]="form" (ngSubmit)="save()">
         <div *ngFor="let etudiant of etudiants">
-          <div class="custom-control custom-control-alternative custom-checkbox mb-3">
-            <input class="custom-control-input" id="customCheck-{{etudiant.idEtudiant}}" type="checkbox" (change)="onEtudiantCheckboxChange(etudiant, $event.target.checked)">
-            <label class="custom-control-label" for="customCheck-{{etudiant.idEtudiant}}">{{ etudiant.cin }} - {{ etudiant.nomEt }} {{ etudiant.prenomET }}</label>
+          <div *ngIf="(user.userId != etudiant.idUser) || (user.role != 'ADMIN')">
+            <div class="custom-control custom-control-alternative custom-checkbox mb-3">
+              <input class="custom-control-input" id="customCheck-{{etudiant.idUser}}" type="checkbox" (change)="onEtudiantCheckboxChange(etudiant, $event.target.checked)">
+              <label class="custom-control-label" for="customCheck-{{etudiant.idUser}}">{{ etudiant.cin }} - {{ etudiant.nom }} {{ etudiant.prenom }}</label>
+            </div>
           </div>
         </div>
         <div class="row">

@@ -1,13 +1,14 @@
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Bloc } from 'src/app/models/Bloc';
+import { Bloc } from 'src/app/models/bloc.model';
 import { chamber } from 'src/app/models/chambre';
-import { Foyer } from 'src/app/models/Foyer';
+import { Foyer } from 'src/app/models/foyer.model';
 import { Reservation } from 'src/app/models/reservation';
 import { universite } from 'src/app/models/universite';
 import { User } from 'src/app/models/user.model';
 import { ReservationService } from 'src/app/services/reservation.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-reservation-new',
@@ -27,16 +28,20 @@ export class ReservationNewComponent implements OnInit {
   etudiants: User[];
   peopleCounts: { [key: number]: number } = {};
   disableFull: { [key: number]: boolean } = {};
-
+  user: User;
+  
   constructor(
     private reservationService: ReservationService,
     private fb: FormBuilder,
     private router: Router,
     private renderer: Renderer2, 
-    private el: ElementRef
+    private el: ElementRef,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
+    this.user = this.userService.getDecodedToken(this.userService.getAuthToken());
+    console.log(this.user)
     this.reservationService.getAlluniversities().subscribe((universites: universite[]) => {
       this.universites = universites;
     })
@@ -49,7 +54,7 @@ export class ReservationNewComponent implements OnInit {
       anneUniversitaire: ['', [Validators.required, this.yearRangeValidator]],
       state: "AWAITING",
       idChambre: [null, Validators.required],
-      etudiantList: this.fb.array([]),
+      userList: this.fb.array([]),
       // insert current user in etudiantList 
       // etudiantList: [logged_in_etudiant],
     })
@@ -57,6 +62,7 @@ export class ReservationNewComponent implements OnInit {
     // this.etudiants.forEach(etudiant => {
     //   this.addEtudiantCheckbox(etudiant);
     // });
+    this.onEtudiantCheckboxChange(this.user, true);
   }
 
   yearRangeValidator(control: AbstractControl): { [key: string]: boolean } | null {
@@ -75,7 +81,7 @@ export class ReservationNewComponent implements OnInit {
   
 
   onEtudiantCheckboxChange(etudiant: any, isChecked: boolean) {
-    const etudiantList = this.form.get('etudiantList') as any;
+    const etudiantList = this.form.get('userList') as any;
 
     if (isChecked) {
       etudiantList.push(this.fb.control(etudiant));
@@ -89,6 +95,8 @@ export class ReservationNewComponent implements OnInit {
     if (this.selected_universite !== uni) {
       this.selected_universite = uni
       this.reservationService.getfoyerbyuniversite(uni.idUniversite).subscribe((foyer: Foyer) => {
+        console.log(foyer)
+        console.log(foyer.blocList)
         this.foyer = foyer;
         this.blocs = foyer.blocList;
         this.uncheckCheckboxes()
@@ -124,7 +132,7 @@ export class ReservationNewComponent implements OnInit {
     checkboxes.forEach((checkbox: HTMLInputElement) => {
       this.renderer.setProperty(checkbox, 'checked', false);
     });
-    this.form.get('etudiantList').reset();
+    this.form.get('userList').reset();
   }
 
   save() {
