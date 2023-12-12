@@ -1,0 +1,10 @@
+<!-- university-card.component.html -->
+
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">{{ university.nomUniversite }}</h5>
+    <p class="card-text">{{ university.adresseUniversite }}</p>
+    <p class="card-text">Foyer: {{ university.foyer?.nomFoyer || 'N/A' }}</p>
+    <button class="btn btn-primary" (click)="openDetailsDialog()">View</button>
+  </div>
+</div>

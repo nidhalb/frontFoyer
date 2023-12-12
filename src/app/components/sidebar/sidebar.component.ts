@@ -20,6 +20,10 @@ export const ROUTES: RouteInfo[] = [
   { path: '/users', title: 'users', icon: 'ni-bullet-list-67 text-red', class: '', requiresAuth: true, requiresRole: 'ADMIN' },
   { path: '/#/reservation', title: 'reservations', icon: 'ni-bullet-list-67 text-red', class: '', requiresAuth: true, requiresRole: 'ADMIN' },
   { path: '/reservation/new', title: 'Add Reservation', icon: 'ni-calendar-grid-58 text-red', class: '', requiresRole: 'ETUDIANT'  },
+    { path: '/admin/stat', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
+    { path: '/un/universities', title: 'FrontOffice',  icon:'ni-planet text-blue', class: '' },
+    { path: '/admin/university-event', title: 'Event Table',  icon:'ni-pin-3 text-orange', class: '' },
+    { path: '/admin/university-table', title: 'University Table',  icon:'ni-single-02 text-yellow', class: '' },
 
 ];
 

@@ -185,7 +185,7 @@
           </a>
         </li>
         <li class="nav-item" *ngIf="role=='ADMIN'">
-          <a routerLinkActive="active" routerLink="/reservation" class="nav-link">
+          <a routerLinkActive="active" routerLink="/users" class="nav-link">
             <i class="ni"></i>
             Users
           </a>
@@ -200,6 +200,12 @@
           <a routerLinkActive="active" routerLink="/chambers" class="nav-link">
             <i class="ni"></i>
             Chambres
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="role=='ETUDIANT'">
+          <a routerLinkActive="active" routerLink="/un/universities" class="nav-link">
+            <i class="ni"></i>
+            Universities 
           </a>
         </li>
 

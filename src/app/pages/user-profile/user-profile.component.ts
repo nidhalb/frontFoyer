@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,7 +13,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private userService: UserService,private router: Router,private fb: FormBuilder) { }
   updateForm: FormGroup;
   data: any;
-id=this.userService.getDecodedToken(this.userService.getAuthToken()).userId;
+  id=this.userService.getDecodedToken(this.userService.getAuthToken()).userId;
   ngOnInit() {
     if(this.userService.authguard()==false){
       this.userService.logout();

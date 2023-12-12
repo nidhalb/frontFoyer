@@ -1,0 +1,108 @@
+
+<div _ngcontent-cto-c120 class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div _ngcontent-tuo-c120 class="container mt-7">
+    <div _ngcontent-ytx-c120="" class="row">
+      <div _ngcontent-ytx-c120="" class="col">
+        <div _ngcontent-ytx-c120="" class="card shadow">
+          <div _ngcontent-ytx-c120="" class="card-header border-0">
+            <h3 _ngcontent-ytx-c120="" class="mb-0">Event list</h3>
+          </div>
+          <div _ngcontent-ytx-c120="" class="card-body">
+
+
+
+<div>
+  <h2>Latest University Events</h2>
+
+    
+  <label for="universityName">University Name:</label>
+  <select id="universityName" [(ngModel)]="selectedUniversity" (change)="onUniversityChange()">
+    <option *ngFor="let university of universities" [value]="university.idUniversite">{{ university.nomUniversite }}</option>
+  </select>
+
+  <label for="startDate">Start Date:</label>
+  <input type="date" id="startDate" [(ngModel)]="startDate" />
+
+  <label for="endDate">End Date:</label>
+  <input type="date" id="endDate" [(ngModel)]="endDate" />
+
+  <button class="btn btn-dark ml-3" (click)="fetchData(selectedUniversity,startDate,endDate)">Fetch Events</button>
+</div>
+
+<!----------------------------------------------------->
+
+
+<div>
+  <h2> Events By University</h2>
+  
+  <label for="universityName">University Name:</label>
+  <select id="universityName" [(ngModel)]="selected" (change)="onChange()">
+    <option *ngFor="let university of universities" [value]="university.idUniversite">{{ university.nomUniversite }}</option>
+  </select>
+
+  <button class="btn btn-dark ml-3" (click)="fetchEventsByUniversity()">Fetch Latest Events</button>
+<!----------------------------------------------------->
+
+    
+<button class="btn btn-success mb-3" (click)="addNewEvent()">Add New Event</button>
+
+<div _ngcontent-ytx-c120="" class="mat-elevation-z8 table-responsive">
+  <table _ngcontent-ytx-c120="" mat-table [dataSource]="dataSource" class="mat-elevation-z8 table align-items-center table-flush">
+    <!-- Number Column -->
+    <ng-container  _ngcontent-ytx-c120=""matColumnDef="number">
+      <th _ngcontent-ytx-c120="" mat-header-cell *matHeaderCellDef>N°</th>
+      <td _ngcontent-ytx-c120="" mat-cell *matCellDef="let row; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+
+    <!-- Event Name Column -->
+    <ng-container _ngcontent-ytx-c120="" matColumnDef="eventName">
+      <th _ngcontent-ytx-c120="" mat-header-cell *matHeaderCellDef>Event Name</th>
+      <td _ngcontent-ytx-c120="" mat-cell *matCellDef="let row">{{ row.eventName }}</td>
+    </ng-container>
+
+    <!-- Event Description Column -->
+    <ng-container _ngcontent-ytx-c120="" matColumnDef="eventDescription">
+      <th _ngcontent-ytx-c120="" mat-header-cell *matHeaderCellDef>Event Description</th>
+      <td _ngcontent-ytx-c120="" mat-cell *matCellDef="let row">{{ row.eventDescription }}</td>
+    </ng-container>
+
+    <!-- Event Date Column -->
+    <ng-container _ngcontent-ytx-c120="" matColumnDef="eventDate">
+      <th _ngcontent-ytx-c120="" mat-header-cell *matHeaderCellDef>Event Date</th>
+      <td _ngcontent-ytx-c120="" mat-cell *matCellDef="let row">{{ row.eventDate | date: 'medium' }}</td>
+    </ng-container>
+
+    <!-- University Name Column -->
+    <ng-container _ngcontent-ytx-c120="" matColumnDef="universityName">
+      <th _ngcontent-ytx-c120="" mat-header-cell *matHeaderCellDef>University Name</th>
+      <td _ngcontent-ytx-c120="" mat-cell *matCellDef="let row">{{ row.university?.nomUniversite }}</td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container _ngcontent-ytx-c120="" matColumnDef="action">
+      <th _ngcontent-ytx-c120="" mat-header-cell *matHeaderCellDef>Action</th>
+      <td _ngcontent-ytx-c120="" mat-cell *matCellDef="let row">
+        <button class="btn btn-danger" (click)="deleteEvent(row.id)">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr _ngcontent-ytx-c120="" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr _ngcontent-ytx-c120="" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <div _ngcontent-ytx-c120="" class="card-footer py-4">
+    <mat-paginator _ngcontent-ytx-c120="" [pageSizeOptions]="[1, 2, 3]" (page)="onPageChange($event)" showFirstLastButtons></mat-paginator>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

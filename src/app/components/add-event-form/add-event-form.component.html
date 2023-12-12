@@ -1,0 +1,51 @@
+<div _ngcontent-cto-c120 class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div _ngcontent-tuo-c120 class="container mt-7">
+  <div _ngcontent-ytx-c120="" class="row">
+    <div _ngcontent-ytx-c120="" class="col">
+      <div _ngcontent-ytx-c120="" class="card shadow">
+
+        <section class="section">
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Add New Event</h5>
+
+  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+    
+    <div class="form-group">
+      <label for="eventName">Event Name:</label>
+      <input type="text" id="eventName" formControlName="eventName"  class="form-control" />
+      <div *ngIf="isFieldInvalid('eventName') && eventForm.get('eventName').touched" class="error-message" style="color: red;">
+        <small class="text-danger">Event Name is required.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="eventDescription">Event Description:</label>
+      <textarea id="eventDescription" formControlName="eventDescription"  class="form-control"></textarea>
+      <div *ngIf="isFieldInvalid('eventDescription') && eventForm.get('eventDescription').touched" class="error-message" style="color: red;">
+        <small class="text-danger">Event Description is required.</small>
+      </div >
+    </div>
+
+    <div class="form-group">
+      <label for="eventDate">Event Date:</label>
+      <input type="date" id="eventDate" formControlName="eventDate"  class="form-control" />
+      <div *ngIf="isFieldInvalid('eventDate') && eventForm.get('eventDate').touched" class="error-message" style="color: red;">
+        <small class="text-danger">Event Date is required.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="universityId">University:</label>
+      <select id="universityId" formControlName="universityId"  class="form-control">
+        <option *ngFor="let university of universities" [value]="university.idUniversite">{{ university.nomUniversite }}</option>
+      </select>
+      <div *ngIf="isFieldInvalid('universityId') && eventForm.get('universityId').touched" class="error-message" style="color: red;">
+        <small class="text-danger">University is required.</small>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="eventForm.invalid">Create Event</button>
+  </form>
+</div>

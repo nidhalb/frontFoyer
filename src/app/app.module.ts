@@ -1,6 +1,5 @@
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 
@@ -18,8 +17,18 @@ import { MapsComponent } from "./pages/maps/maps.component";
 import { ConfirmDeleteDirective } from "./confirm-delete.directive";
 import { StarRatingModule } from "angular-star-rating";
 import { ToastrModule } from "ngx-toastr";
-import { MatPaginatorModule } from "@angular/material/paginator";
 import { AlertDirective } from "./alert.directive";
+import { UniversiteComponent } from './universite/universite.component';
+import { UniversiteListComponent } from './universite-list/universite-list.component';
+
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
+import { UniversityCardComponent } from './university-card/university-card.component';
+import { UniversityTableComponent } from './university-table/university-table.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { UniversityDetailsDialogComponent } from './university-details-dialog/university-details-dialog.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -39,14 +48,23 @@ import { AlertDirective } from "./alert.directive";
       closeButton: true,
       progressBar: true,
     }),
+    MatIconModule,
+    MatDialogModule,
+
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    ConfirmDeleteDirective,
+    UniversiteComponent,
+    UniversiteListComponent,
+    UniversityCardComponent,
+    UniversityTableComponent,
+    SearchBarComponent,
+    UniversityDetailsDialogComponent,
+
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

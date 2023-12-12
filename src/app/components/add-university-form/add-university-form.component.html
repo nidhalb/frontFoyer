@@ -1,0 +1,54 @@
+<div _ngcontent-cto-c120 class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div _ngcontent-tuo-c120 class="container mt-7">
+  <div _ngcontent-ytx-c120="" class="row">
+    <div _ngcontent-ytx-c120="" class="col">
+      <div _ngcontent-ytx-c120="" class="card shadow">
+
+        <section class="section">
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Add University</h5>
+
+    <form [formGroup]="newUniversiteForm" (ngSubmit)="addNewUniversity()">
+      <div class="form-group">
+        <label for="nomUniversite">University Name:</label>
+        <input type="text" id="nomUniversite" formControlName="nomUniversite" class="form-control">
+        <div style="color: red;" *ngIf="newUniversiteForm.get('nomUniversite').hasError('required') && newUniversiteForm.get('nomUniversite').touched" class="error-message">
+          University Name is required.
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <label for="adresseUniversite">University Address:</label>
+        <input type="text" id="adresseUniversite" formControlName="adresseUniversite" class="form-control">
+        <div style="color: red;"  *ngIf="newUniversiteForm.get('adresseUniversite').hasError('required') && newUniversiteForm.get('adresseUniversite').touched" class="error-message">
+          University Address is required.
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <label for="foyer">Foyer:</label>
+        <select id="foyer" formControlName="foyer" class="form-control">
+          <option *ngFor="let foyer of foysers" [ngValue]="foyer.idFoyer">{{ foyer.nomFoyer }}</option>
+        </select>
+        <div style="color: red;" *ngIf="newUniversiteForm.get('foyer').hasError('required') && newUniversiteForm.get('foyer').touched" class="error-message">
+          Foyer is required.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Add University</button>
+    </form>
+
+  </div>
+</div>
+        </section>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+    
+    
+    
+    
+
