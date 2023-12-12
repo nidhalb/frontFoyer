@@ -15,9 +15,11 @@ import { ComponentsModule } from "./components/components.module";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { MapsComponent } from "./pages/maps/maps.component";
-import { ConfirmDeleteDirective } from './confirm-delete.directive';
-import { StarRatingModule } from 'angular-star-rating';
+import { ConfirmDeleteDirective } from "./confirm-delete.directive";
+import { StarRatingModule } from "angular-star-rating";
 import { ToastrModule } from "ngx-toastr";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { AlertDirective } from "./alert.directive";
 
 @NgModule({
   imports: [
@@ -30,15 +32,20 @@ import { ToastrModule } from "ngx-toastr";
     AppRoutingModule,
     LeafletModule,
     ReactiveFormsModule,
+    MatPaginatorModule,
     StarRatingModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 15000, // 15 seconds
       closeButton: true,
       progressBar: true,
     }),
-
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, ConfirmDeleteDirective],
+  declarations: [
+    AppComponent,
+    AdminLayoutComponent,
+    AuthLayoutComponent,
+    ConfirmDeleteDirective,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

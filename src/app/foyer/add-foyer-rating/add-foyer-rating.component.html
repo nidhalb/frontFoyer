@@ -1,0 +1,42 @@
+<div>
+  <div class="container mt-4">
+    <button class="btn btn-primary w-25" routerLink="/foyer/list">
+      Go back to list
+    </button>
+    <div class="card">
+      <div class="card-header">Residence Information</div>
+      <div class="card-body">
+        <p>{{ foyer.nomFoyer }}</p>
+        <p>{{ foyer.region }}</p>
+        <p>
+          {{ foyer.lattitude | latLngToAddress : foyer.longitude | async }}
+        </p>
+      </div>
+    </div>
+
+    <div class="card mt-4">
+      <div class="card-header">Add Rating</div>
+      <div class="card-body">
+        <form [formGroup]="ratingForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="rating">Rating:</label>
+            <star-rating [starType]="'svg'"  (starClickChange)="onClick($event)" formControlName="ratingControl">
+            </star-rating>
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea
+              class="form-control"
+              id="description"
+              name="description"
+              formControlName="description"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

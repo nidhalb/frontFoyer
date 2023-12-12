@@ -5,12 +5,18 @@ import { FoyerListComponent } from "./foyer-list/foyer-list.component";
 import { FoyerAddComponent } from "./foyer-add/foyer-add.component";
 import { FoyerEditComponent } from "./foyer-edit/foyer-edit.component";
 import { FoyerRatingComponent } from "./foyer-rating/foyer-rating.component";
+import { EtudiantAddRatingComponent } from "./etudiant-add-rating/etudiant-add-rating.component";
+import { AddFoyerRatingComponent } from "./add-foyer-rating/add-foyer-rating.component";
 
 const routes: Routes = [
   { path: "", component: FoyerListComponent },
   { path: "add", component: FoyerAddComponent },
   { path: "edit/:id", component: FoyerEditComponent },
   { path: ":id/ratings", component: FoyerRatingComponent },
+  { path: "list", component: EtudiantAddRatingComponent },
+  { path: "addRating/:id", component: AddFoyerRatingComponent },
+
+
 
 ];
 @NgModule({

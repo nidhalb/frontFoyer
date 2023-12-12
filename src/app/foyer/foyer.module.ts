@@ -22,7 +22,9 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { StarRatingModule } from "angular-star-rating";
 import { FoyerRatingComponent } from "./foyer-rating/foyer-rating.component";
 import { ToastrModule } from "ngx-toastr";
-
+import { EtudiantAddRatingComponent } from "./etudiant-add-rating/etudiant-add-rating.component";
+import { AlertDirective } from "../alert.directive";
+import { AddFoyerRatingComponent } from "./add-foyer-rating/add-foyer-rating.component";
 @NgModule({
   declarations: [
     FoyerComponent,
@@ -33,6 +35,10 @@ import { ToastrModule } from "ngx-toastr";
     LatLngToAddressPipe,
     FoyerDeleteConfirmationComponent,
     FoyerRatingComponent,
+    AlertDirective,
+    EtudiantAddRatingComponent,
+    AddFoyerRatingComponent
+    
   ],
   imports: [
     CommonModule,
@@ -46,6 +52,7 @@ import { ToastrModule } from "ngx-toastr";
     MatSortModule,
     MatInputModule,
     MatSelectModule,
+    
     NgbModule,
     StarRatingModule.forRoot(),
     ToastrModule.forRoot({
