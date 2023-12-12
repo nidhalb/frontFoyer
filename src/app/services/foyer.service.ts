@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Bloc } from '../models/Bloc';
+import { Bloc } from '../models/bloc';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Foyer } from '../models/foyer.model';

@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Observable, map, startWith } from "rxjs";
 import { Foyer } from "src/app/models/foyer.model";
-import { FoyerService } from "src/app/services/foyer.service";
+import { FoyerManagementService } from "src/app/services/foyer-management.service";
 
 @Component({
   selector: "app-bloc-add-dialog",
@@ -27,7 +27,7 @@ export class BlocAddDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<BlocAddDialogComponent>,
     private fb: FormBuilder,
-    private foyerService: FoyerService,
+    private foyerService: FoyerManagementService,
     @Inject(MAT_DIALOG_DATA) data
   ) {
     this.title = data.title
@@ -44,7 +44,7 @@ export class BlocAddDialogComponent implements OnInit {
   ngOnInit(): void {
     
 
-    this.foyerService.getAllFoyer().subscribe((data: Foyer[]) => {
+    this.foyerService.getAll().subscribe((data: Foyer[]) => {
       this.listFoyer = data;
       data.forEach(element => {
         this.options.push(element.nomFoyer);
