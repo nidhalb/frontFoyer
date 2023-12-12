@@ -10,6 +10,7 @@ import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { IconsComponent } from '../../pages/icons/icons.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
+import { TablesComponent } from '../../pages/tables/tables.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListeUsersComponent } from 'src/app/pages/Users/liste-users.component';
@@ -30,6 +31,7 @@ import { UserDetailsComponent } from 'src/app/pages/user-details/user-details.co
   declarations: [
     DashboardComponent,
     UserProfileComponent,
+    TablesComponent,
     ListeUsersComponent,
     ListeUserDetailsComponent,
     UserDetailsComponent,

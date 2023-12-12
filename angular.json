@@ -25,6 +25,7 @@
             "allowedCommonJsDependencies": ["chart.js"],
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss",
               "src/assets/scss/argon.scss",
               "node_modules/leaflet/dist/leaflet.css",
@@ -32,6 +33,7 @@
 
             ],
             "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/chart.js/dist/Chart.min.js",
               "node_modules/clipboard/dist/clipboard.min.js"
             ]
