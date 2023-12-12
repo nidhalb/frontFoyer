@@ -1,0 +1,43 @@
+<app-sidebar></app-sidebar>
+<div class="main-content">
+  <app-navbar></app-navbar>
+  <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <button class="btn btn-primary w-10 ml-5" routerLink="/foyer">
+      Go back to list
+    </button>
+    <div class="container-fluid">
+      <div *ngIf="ratings && ratings.length > 0" class="container mt-4">
+        <h2>Ratings for Residence {{ foyer.nomFoyer }}</h2>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h3 class="card-title">Residence Details</h3>
+            <p class="card-text"><strong>Region:</strong> {{ foyer.region }}</p>
+            <p class="card-text">
+              <strong>Capacity:</strong> {{ foyer.capacityFoyer }}
+            </p>
+          </div>
+        </div>
+        <h3>Ratings</h3>
+        <div *ngFor="let rating of ratings" class="card mb-2">
+          <div class="card-body">
+            <star-rating
+              [starType]="'svg'"
+              [rating]="rating.rateNumber"
+              [readOnly]="true"
+            ></star-rating>
+            <p class="card-text">
+              <strong>Content:</strong> {{ rating.content }}
+            </p>
+            <p class="card-text">
+              <strong>Date:</strong> {{ rating.date | date : "medium" }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <app-footer></app-footer>
+  </div>
+</div>

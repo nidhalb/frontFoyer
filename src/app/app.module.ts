@@ -1,37 +1,45 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+import { RouterModule } from "@angular/router";
 
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { AppComponent } from "./app.component";
+import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
+import { AuthLayoutComponent } from "./layouts/auth-layout/auth-layout.component";
 
-import { AppComponent } from './app.component';
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { AppRoutingModule } from './app.routing';
-import { ComponentsModule } from './components/components.module';
-
+import { AppRoutingModule } from "./app.routing";
+import { ComponentsModule } from "./components/components.module";
+import { NavbarComponent } from "./components/navbar/navbar.component";
+import { LeafletModule } from "@asymmetrik/ngx-leaflet";
+import { MapsComponent } from "./pages/maps/maps.component";
+import { ConfirmDeleteDirective } from './confirm-delete.directive';
+import { StarRatingModule } from 'angular-star-rating';
+import { ToastrModule } from "ngx-toastr";
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
-    ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     ComponentsModule,
     NgbModule,
     RouterModule,
     AppRoutingModule,
+    LeafletModule,
+    ReactiveFormsModule,
+    StarRatingModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 15000, // 15 seconds
+      closeButton: true,
+      progressBar: true,
+    }),
+
   ],
-  declarations: [
-    AppComponent,
-    AdminLayoutComponent,
-    AuthLayoutComponent
-  ],
+  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, ConfirmDeleteDirective],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

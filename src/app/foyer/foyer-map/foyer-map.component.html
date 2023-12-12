@@ -1,0 +1,14 @@
+<div class="container col-12">
+  <div class="container">
+    <div
+      style="height: 250px; width: 300px"
+      class="map-container"
+      leaflet
+      [leafletOptions]="options"
+      (leafletMapReady)="onMapReady($event)"
+    ></div>
+    <p>
+      {{ foyerLocation.lat | latLngToAddress : foyerLocation.lng | async }}
+    </p>
+  </div>
+</div>
