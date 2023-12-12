@@ -1,0 +1,23 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+<br>
+<br>
+<br>
+<br>
+<br>
+</div>
+<div class="container">
+<div class="card" style="width: 18rem;">
+  <!-- You can replace the src attribute with the actual property from your user object -->
+  
+
+  <div class="card-body">
+    <!-- Display user information in the card title and text -->
+    <h5 class="card-title">{{ user.nom }} {{ user.prenom }}</h5>
+    <p class="card-text">Email: {{ user.email }}</p>
+    
+    <p class="card-text">CIN: {{ user.cin }}</p>
+    <p class="card-text">Ecole: {{ user.ecole }}</p>
+    <p class="card-text">Date of Birth: {{ user.dateNaissance | date }}</p>
+  </div>
+</div>
+</div>

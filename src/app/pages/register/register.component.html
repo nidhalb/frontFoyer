@@ -38,31 +38,113 @@
           <div class="text-center text-muted mb-4">
             <small>Or sign up with credentials</small>
           </div>
-          <form role="form">
+          <form role="form" #f="ngForm" (submit)="register()">
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                 </div>
-                <input class="form-control" placeholder="Name" type="text">
+                <input class="form-control" [(ngModel)]="user.nom" name="nom" #nom="ngModel" required minlength="4" pattern="[a-zA-Z]*"  placeholder="Nom" type="text">
+                
+            
+                
               </div>
+              <div class="text-warning font-italic" *ngIf="nom.invalid && nom.touched">
+                <small *ngIf="nom.errors['required']">
+                    Champ obligatoire
+                </small>
+                <small *ngIf="nom.errors['minlength']">
+                min {{nom.errors['minlength']['requiredLength']}} caractères
+                alors que vous avez écrit 
+                {{ nom.errors['minlength']['actualLength'] }}
+                </small>
+                <small *ngIf="nom.errors['pattern']">
+                    ne contient que des lettres
+                </small>
+                </div>
             </div>
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                 </div>
-                <input class="form-control" placeholder="Email" type="email">
+                <input class="form-control" [(ngModel)]="user.prenom" name="prenom" #prenom="ngModel" required minlength="4" pattern="[a-zA-Z]*"  placeholder="Prenom" type="text">
+                
+            
+                
               </div>
+              <div class="text-warning font-italic" *ngIf="prenom.invalid && prenom.touched">
+                <small *ngIf="prenom.errors['required']">
+                    Champ obligatoire
+                </small>
+                <small *ngIf="prenom.errors['minlength']">
+                min {{prenom.errors['minlength']['requiredLength']}} caractères
+                alors que vous avez écrit 
+                {{ prenom.errors['minlength']['actualLength'] }}
+                </small>
+                <small *ngIf="prenom.errors['pattern']">
+                    ne contient que des lettres
+                </small>
+                </div>
             </div>
             <div class="form-group">
-              <div class="input-group input-group-alternative">
+              <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                 </div>
-                <input class="form-control" placeholder="Password" type="password">
+                <input class="form-control" [(ngModel)]="user.email" name="email" #email="ngModel" required  pattern="^[a-zA-Z0-9._-]+@gmail.com"  placeholder="Email" type="email">
+                
+            
+                
               </div>
+              <small class="text-warning font-italic" *ngIf="email.invalid && email.touched">
+                il faut avoir un compte gmail
+            </small>
             </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                </div>
+                <input class="form-control" [(ngModel)]="user.cin" name="cin" #cin="ngModel" required  pattern="[0-9]*8"  placeholder="Cin" type="number">
+                
+            
+                
+              </div>
+              <small class="text-warning font-italic" *ngIf="cin.invalid && cin.touched">
+                CIN
+            </small>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                </div>
+                <input class="form-control" [(ngModel)]="user.dateNaissance" name="dateNaissance" #dateNaissance="ngModel" required  type="date">
+                
+            
+                
+              </div>
+              <small class="text-warning font-italic" *ngIf="dateNaissance.invalid && dateNaissance.touched">
+                required
+            </small>
+            </div>
+            
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                </div>
+                <input class="form-control" [(ngModel)]="user.motDePasse" name="motDePasse" #motDePasse="ngModel" required minlength="5" pattern="^[a-zA-Z0-9]{8,}?"  placeholder="Password" type="Password">
+                
+            
+                
+              </div>
+              <small class="text-warning font-italic" *ngIf="motDePasse.invalid && motDePasse.touched">
+                too short
+            </small>
+            </div>
+            
             <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
             <div class="row my-4">
               <div class="col-12">
@@ -75,10 +157,23 @@
               </div>
             </div>
             <div class="text-center">
-              <button type="button" class="btn btn-primary mt-4">Create account</button>
+              <button type="submit" [disabled]="f.invalid" class="btn btn-primary mt-4">Create account</button>
             </div>
           </form>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-md-center">
+  <div class="col-4">
+    <div class="card" style="width: '18rem'">
+      <div class="card-body">
+        <h5 class="card-title">Backend response</h5>
+        <p class="card-text">Content:</p>
+        <ul>
+          <li *ngFor="let line of data">{{line.idUser}}</li>
+        </ul>
       </div>
     </div>
   </div>
