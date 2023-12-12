@@ -1,11 +1,9 @@
-import { chamber } from "./chambre";
-import { Foyer } from "./foyer.model";
+import { Foyer } from "./Foyer";
 
 
 export interface Bloc {
     idBloc: number,
     nomBloc: string,
     capaciteBloc: number,
-    foyer: Foyer,
-    chamberList: chamber[]
+    foyer: Foyer
 }
