@@ -87,4 +87,8 @@ export class FoyerManagementService {
     const url = `${this.apiUrl}/getRatingByFoyer/${foyerId}`;
     return this.http.get<any>(url);
   }
+  countAll(): Observable<number> {
+    const url = `${this.apiUrl}/countAll`;
+    return this.http.get<any>(url);
+  }
 }

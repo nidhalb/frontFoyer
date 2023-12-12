@@ -56,9 +56,16 @@ export class FoyerListComponent implements OnInit {
   ngOnInit(): void {
     this.getAllFoyers();
     this.formList();
+    this.countAll();
+    console.log(this.nbFoyer);
   }
   foyerLocation: { lat: number; lng: number };
-
+  nbFoyer: number;
+  countAll() {
+    this.foyerService.countAll().subscribe({
+      next: (data) => (this.nbFoyer = data),
+    });
+  }
   openMapPopup(foyer: Foyer) {
     console.log(foyer);
     const modalRef = this.modalService.open(FoyerMapComponent);
