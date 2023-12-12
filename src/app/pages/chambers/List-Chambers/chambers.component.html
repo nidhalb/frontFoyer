@@ -1,0 +1,141 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-3 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Current Capacity</h5>
+                  <span class="h2 font-weight-bold mb-0">{{ activeBlocCapacity }}</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                    <i class="fas fa-chart-pie"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-3 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Total Bloc Capacity</h5>
+                  <span class="h2 font-weight-bold mb-0">{{  totalBlocCapacity}}</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                    <i class="fas fa-users"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-3 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Foyer total Chambers</h5>
+                  <span class="h2 font-weight-bold mb-0">{{allChambers}}</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                    <i class="fas fa-users"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Chambers By Bloc</h3>
+          <div class="form-group">
+            <label for="blocSelect">Select Bloc:</label>
+            <select class="form-control" id="blocSelect" [(ngModel)]="selectedBlocId" (change)="updateChamberTable()">
+              <option *ngFor="let bloc of blocs" [value]="bloc.idBloc">{{ bloc.nomBloc }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Chamber Number</th>
+                <th scope="col">Type Of Chamber</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let chamber of pagedChambers">
+                <td>{{ chamber.numeroChambre }}</td>
+                <td>{{ chamber.typeC }}</td>
+               
+                <td>
+                  <!-- ... your existing code ... -->
+<!-- edit-chambers.component.html -->
+<!-- ... existing code ... -->
+
+<td>
+  <button class="btn btn-primary" (click)="toggleEditForm(chamber.idChambre)">Edit</button>
+  
+  <button class="btn btn-danger" (click)="deleteChamberAlert(chamber.idChambre)">Delete</button>
+</td>
+
+<!-- ... existing code ... -->
+              </tr>
+            </tbody>
+          </table>
+          <!-- Pagination controls -->
+          <mat-paginator [length]="totalItems" [pageSize]="itemsPerPage" [pageIndex]="currentPage" (page)="pageChanged($event)">
+          </mat-paginator>
+          <div *ngIf="showSuccessMessage" class="alert alert-warning alert-dismissible fade show" role="alert">
+            <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+            <span class="alert-inner--text"><strong>Deleted!</strong></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)=" closeSuccessMessage()">
+              <span aria-hidden="true">×</span>
+            </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="editisTrue">
+    <app-edit-chambers [chamberId]="idcham" (chamberEdited)="onChamberEdited()" [selectedBlocId]="selectedBlocId"></app-edit-chambers>
+  </div>
+  </div>
+ <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0" style="margin-top: 90px;"> 
+  <button style="margin-top: 10px;" class="btn btn-primary btn-lg btn-block" (click)="toggleAddChambers()" [disabled]="!selectedBlocId">
+    Add Chambers to : {{ getSelectedBlocName() }}
+  </button>
+  <div *ngIf="showaddchamber">
+    <app-add-chambers (chamberAdded)="onChamberAdded()" [selectedBlocId]="selectedBlocId" (addChambersToggle)="handleAddChambersToggle($event)"></app-add-chambers>
+  </div>
+ </div>
+
+</div>
+
+
+
+
+
+
+
+

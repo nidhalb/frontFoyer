@@ -1,0 +1,32 @@
+<!-- edit-chambers-form.component.html -->
+<form [formGroup]="editChamberForm" class="chamber-form">
+    <div class="form-group">
+      <label for="numeroChambre">Room Number:</label>
+      <input type="number" class="form-control" id="numeroChambre" formControlName="numeroChambre">
+      <div *ngIf="formControls.numeroChambre.touched && formControls.numeroChambre.invalid" class="text-danger">
+        Room Number is required and must be a number.
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="typeC">Room Type:</label>
+      <select class="form-control" id="typeC" formControlName="typeC" placeholder="Select Room Type">
+        <option value="SIMPLE">Simple Room</option>
+        <option value="DOUBLE">Double Room</option>
+        <option value="TRIPLE">Triple Room</option>
+      </select>
+      <div *ngIf="formControls.typeC.touched && formControls.typeC.invalid" class="text-danger">
+        Room Type is required.
+      </div>
+    </div>
+  
+    <button class="btn btn-primary" type="button" (click)="saveChanges()"  [disabled]="!editChamberForm.valid">Save Changes</button>
+    <div *ngIf="showSuccessMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+        <span class="alert-inner--text"><strong>Success!</strong></span>
+        <button type="button" class="close" (click)="closeSuccessMessage()" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+  </form>
+  
