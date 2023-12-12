@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { bloc } from 'src/app/models/bloc';
+import { Bloc } from 'src/app/models/Bloc';
 import { chamber } from 'src/app/models/chambre';
 import { Etudiant } from 'src/app/models/etudiant';
-import { foyer } from 'src/app/models/foyer';
+import { Foyer } from 'src/app/models/Foyer';
 import { Reservation } from 'src/app/models/reservation';
 import { universite } from 'src/app/models/universite';
 import { ReservationService } from 'src/app/services/reservation.service';
@@ -18,9 +18,9 @@ export class ReservationNewComponent implements OnInit {
 
   universites: universite[];
   selected_universite: universite = null;
-  foyer: foyer= null;
-  blocs: bloc[]= null;
-  selected_bloc: bloc;
+  foyer: Foyer= null;
+  blocs: Bloc[]= null;
+  selected_bloc: Bloc;
   chambres: chamber[]= null;
   selected_chambre: chamber;
   form: FormGroup;
@@ -88,7 +88,7 @@ export class ReservationNewComponent implements OnInit {
   selectuni(uni: universite) {
     if (this.selected_universite !== uni) {
       this.selected_universite = uni
-      this.reservationService.getfoyerbyuniversite(uni.idUniversite).subscribe((foyer: foyer) => {
+      this.reservationService.getfoyerbyuniversite(uni.idUniversite).subscribe((foyer: Foyer) => {
         this.foyer = foyer;
         this.blocs = foyer.blocList;
         this.uncheckCheckboxes()
@@ -96,7 +96,7 @@ export class ReservationNewComponent implements OnInit {
     }
   }
 
-  selectbloc(bloc: bloc) {
+  selectbloc(bloc: Bloc) {
     if (this.selected_bloc !== bloc) {
       this.selected_bloc = bloc
       this.chambres = bloc.chamberList;
