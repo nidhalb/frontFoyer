@@ -1,0 +1,155 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">ALL</h5>
+                  <span class="h2 font-weight-bold mb-0"></span>
+                </div>
+                <div class="col-auto">
+                  <div class="cursor-pointer icon icon-shape bg-danger text-white rounded-circle shadow">
+                    <i class="fas fa-chart-bar"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">
+                    Awaiting
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0"></span>
+                </div>
+                <div class="col-auto">
+                  <div class="cursor-pointer icon icon-shape bg-warning text-white rounded-circle shadow">
+                    <i class="fas fa-chart-pie"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">
+                    Confirmed
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0"></span>
+                </div>
+                <div class="col-auto">
+                  <div class="cursor-pointer icon icon-shape bg-yellow text-white rounded-circle shadow">
+                    <i class="fas fa-users"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">
+                    Rejected
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0"></span>
+                </div>
+                <div class="col-auto">
+                  <div class="cursor-pointer icon icon-shape bg-info text-white rounded-circle shadow">
+                    <i class="fas fa-percent"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="card p-5 offset-1 col-lg-10">
+      <div class="row height">
+        <h3 class="same-line" *ngIf="selected_universite != null">{{ selected_universite.nomUniversite }} ></h3>
+        <h3 class="same-line" *ngIf="selected_universite != null">{{ foyer.nomFoyer }} ></h3>
+        <h3 class="same-line" *ngIf="selected_bloc != null">{{ selected_bloc.nomBloc }} ></h3>
+        <h3 class="same-line" *ngIf="selected_chambre != null">{{ selected_chambre.numeroChambre }} - {{
+          selected_chambre.typeC }}</h3>
+
+      </div>
+      <div class="row text-center mb-5">
+        <div class="col-3">
+          Universite
+          <div *ngFor="let uni of universites">
+            <button [ngClass]="{'btn-primary': selected_universite === uni, 'btn-default': selected_universite !== uni}"
+              (click)="selectuni(uni)" class="btn m-2">
+              {{ uni.nomUniversite }}
+            </button>
+          </div>
+        </div>
+        <div class="col-3">
+          Foyer
+          <div>
+            <button *ngIf="foyer != null" class="btn btn-primary m-2">{{ foyer.nomFoyer }}</button>
+          </div>
+        </div>
+        <div class="col-3">
+          Bloc
+          <div *ngIf="foyer != null">
+            <div *ngFor="let bloc of foyer.blocList">
+              <button [ngClass]="{'btn-primary': selected_bloc === bloc, 'btn-default': selected_bloc !== bloc}"
+               (click)="selectbloc(bloc)" class="btn m-2">{{ bloc.nomBloc }}</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          Chambre
+          <div *ngIf="blocs != null">
+            <div *ngFor="let chambre of selected_bloc.chamberList">
+              <button [ngClass]="{'btn-danger': disableFull[chambre.idChambre], 'btn-primary': selected_chambre === chambre, 'btn-default': (selected_chambre !== chambre) && !disableFull[chambre.idChambre]}"
+               (click)="selectchambre(chambre)" class="btn m-2" [disabled]="disableFull[chambre.idChambre]">{{ peopleCounts[chambre.idChambre] }} / {{ chambre.typeC }} </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <div *ngFor="let etudiant of etudiants">
+          <div class="custom-control custom-control-alternative custom-checkbox mb-3">
+            <input class="custom-control-input" id="customCheck-{{etudiant.idEtudiant}}" type="checkbox" (change)="onEtudiantCheckboxChange(etudiant, $event.target.checked)">
+            <label class="custom-control-label" for="customCheck-{{etudiant.idEtudiant}}">{{ etudiant.cin }} - {{ etudiant.nomEt }} {{ etudiant.prenomET }}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="offset-lg-2 col-lg-8">
+            <div class="form-group">
+              <input type="text" formControlName="anneUniversitaire"
+                class="form-control form-control-alternative text-center" id="annee"
+                placeholder="Please enter a valid year range in the format yyyy-yyyy ">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="offset-lg-3 col-lg-6">
+            <button type="submit" class="btn btn-success btn-block" [disabled]="!this.form.valid">Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
