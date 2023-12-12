@@ -1,0 +1,50 @@
+<div _ngcontent-cto-c120 class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div _ngcontent-tuo-c120 class="container mt-7">
+  <div _ngcontent-ytx-c120="" class="row">
+    <div _ngcontent-ytx-c120="" class="col">
+      <div _ngcontent-ytx-c120="" class="card shadow">
+        <div _ngcontent-ytx-c120="" class="card-header border-0">
+          <h3 _ngcontent-ytx-c120="" class="mb-0">University list</h3>
+        </div>
+        <div _ngcontent-ytx-c120="" class="card-body">
+          <!-- Search Bar -->
+            <app-search-bar (search)="search($event)"></app-search-bar>
+            <div>
+              <input type="text" class="form-control" placeholder="Search by University Name, Address, or Foyer Name" [(ngModel)]="searchTerm" (input)="liveSearch()"/>
+            </div>          
+          <!-- End Search Bar -->
+  
+          <button class="btn btn-success mb-3" (click)="addNewUniversity()">Add New University</button> 
+          <div _ngcontent-ytx-c120="" class="table-responsive">
+            <table _ngcontent-ytx-c120="" class="table align-items-center table-flush">
+              <thead _ngcontent-ytx-c120="" class="thead-light">
+                <tr _ngcontent-ytx-c120="">
+                  <th _ngcontent-ytx-c120="" scope="col">N°</th>
+                  <th _ngcontent-ytx-c120="" scope="col">University Name</th>
+                  <th _ngcontent-ytx-c120="" scope="col">University Address</th>
+                  <th _ngcontent-ytx-c120="" scope="col">Foyer Name</th>
+                  <th _ngcontent-ytx-c120="" scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody _ngcontent-ytx-c120="">
+                <tr *ngFor="let university of filteredUniversities; let i = index">
+                  <th _ngcontent-ytx-c120="" scope="row">{{ i + 1 }}</th>
+                  <td _ngcontent-ytx-c120="">{{ university.nomUniversite }}</td>
+                  <td _ngcontent-ytx-c120="">{{ university.adresseUniversite }}</td>
+                  <td _ngcontent-ytx-c120="">{{ university.foyer?.nomFoyer || 'N/A' }}</td>
+                  <td _ngcontent-ytx-c120="">
+                    <button class="btn btn-primary" (click)="editUniversity(university.idUniversite)">Edit</button>
+                    <button class="btn btn-danger" (click)="deleteUniversity(university.idUniversite)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div _ngcontent-ytx-c120="" class="card-footer py-4">
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
