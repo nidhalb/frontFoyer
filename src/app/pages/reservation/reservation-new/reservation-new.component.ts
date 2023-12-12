@@ -3,10 +3,10 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { Bloc } from 'src/app/models/Bloc';
 import { chamber } from 'src/app/models/chambre';
-import { Etudiant } from 'src/app/models/etudiant';
 import { Foyer } from 'src/app/models/Foyer';
 import { Reservation } from 'src/app/models/reservation';
 import { universite } from 'src/app/models/universite';
+import { User } from 'src/app/models/user.model';
 import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class ReservationNewComponent implements OnInit {
   chambres: chamber[]= null;
   selected_chambre: chamber;
   form: FormGroup;
-  etudiants: Etudiant[];
+  etudiants: User[];
   peopleCounts: { [key: number]: number } = {};
   disableFull: { [key: number]: boolean } = {};
 
@@ -40,7 +40,7 @@ export class ReservationNewComponent implements OnInit {
     this.reservationService.getAlluniversities().subscribe((universites: universite[]) => {
       this.universites = universites;
     })
-    this.reservationService.getAllEtudiants().subscribe((etudiants: Etudiant[]) => {
+    this.reservationService.getAllEtudiants().subscribe((etudiants: User[]) => {
       this.etudiants = etudiants;
       console.log(this.etudiants)
     })

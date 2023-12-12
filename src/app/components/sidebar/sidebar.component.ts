@@ -12,13 +12,15 @@ declare interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-  { path: '/dashboard', title: 'Dashboard', icon: 'ni-tv-2 text-primary', class: '', requiresAuth: true },
   { path: '/reservation', title: 'Reservation', icon: 'ni-calendar-grid-58 text-red', class: '' },
   { path: '/reservation/new', title: 'Add Reservation', icon: 'ni-calendar-grid-58 text-red', class: '' },
   { path: '/icons', title: 'Icons', icon: 'ni-planet text-blue', class: '', requiresAuth: true },
   { path: '/maps', title: 'Maps', icon: 'ni-pin-3 text-orange', class: '', requiresAuth: true },
   { path: '/user-profile', title: 'User profile', icon: 'ni-single-02 text-yellow', class: '', requiresAuth: true },
-  { path: '/users', title: 'users', icon: 'ni-bullet-list-67 text-red', class: '', requiresAuth: true, requiresRole: 'ADMIN' } 
+  { path: '/users', title: 'users', icon: 'ni-bullet-list-67 text-red', class: '', requiresAuth: true, requiresRole: 'ADMIN' },
+  { path: '/#/reservation', title: 'reservations', icon: 'ni-bullet-list-67 text-red', class: '', requiresAuth: true, requiresRole: 'ADMIN' },
+  { path: '/reservation/new', title: 'Add Reservation', icon: 'ni-calendar-grid-58 text-red', class: '', requiresRole: 'ETUDIANT'  },
+
 ];
 
 @Component({

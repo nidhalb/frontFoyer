@@ -9,7 +9,7 @@ import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/ro
 })
 export class UserService {
 
-  private apiUrl = 'http://localhost:8089';
+  private apiUrl = 'http://localhost:8089/foyerProject';
   
   constructor(private httpClient: HttpClient, private router: Router) { }
 
