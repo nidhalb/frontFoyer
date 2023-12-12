@@ -18,6 +18,10 @@ import { ListeUserDetailsComponent} from 'src/app/pages/liste-user-details/liste
 import { UserDetailsComponent } from 'src/app/pages/user-details/user-details.component';
 // import { ToastrModule } from 'ngx-toastr';
 
+import { MatDialogModule } from '@angular/material/dialog';
+//import { PaginationControlsModule } from 'ngx-pagination';
+// import { ToastrModule } from 'ngx-toastr';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   imports: [
     CommonModule,
@@ -25,8 +29,12 @@ import { UserDetailsComponent } from 'src/app/pages/user-details/user-details.co
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    
+    MatPaginatorModule,
+    MatDialogModule
   ],
   declarations: [
     DashboardComponent,

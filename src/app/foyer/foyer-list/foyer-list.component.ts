@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { Foyer } from "src/app/models/foyer.model";
 import { FoyerManagementService } from "src/app/services/foyer-management.service";
 import { FoyerMapComponent } from "../foyer-map/foyer-map.component";
 import { FoyerDeleteConfirmationComponent } from "../foyer-delete-confirmation/foyer-delete-confirmation.component";
 import { ActivatedRoute, Router } from "@angular/router";
+import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({
   selector: "app-foyer-list",

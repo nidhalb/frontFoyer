@@ -1,4 +1,5 @@
 import { chamber } from "./chambre";
+import { Foyer } from "./foyer.model";
 
 export class Bloc {
     idBloc: number;
@@ -12,4 +13,5 @@ export class Bloc {
       this.nomBloc = nomBloc;
       this.capaciteBloc = capaciteBloc;
     }
+    foyer: Foyer
   }

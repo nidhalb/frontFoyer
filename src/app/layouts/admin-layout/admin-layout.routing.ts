@@ -25,4 +25,6 @@ export const AdminLayoutRoutes: Routes = [
         path: 'reservation',
         loadChildren: () => import('./../../pages/reservation/reservation.module').then(m => m.ReservationModule)
     }, 
+    { path: 'chambers', loadChildren: () => import('../../pages/chambers/chambers.module').then(m => m.ChambersModule) },
+
 ];

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Bloc } from '../models/bloc';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
+import { Bloc } from '../models/bloc.model';
 
 @Injectable({
   providedIn: 'root'
