@@ -93,8 +93,9 @@
           selected_chambre.typeC }}</h3>
 
       </div>
-      <div class="row mb-5">
+      <div class="row text-center mb-5">
         <div class="col-3">
+          Universite
           <div *ngFor="let uni of universites">
             <button [ngClass]="{'btn-primary': selected_universite === uni, 'btn-default': selected_universite !== uni}"
               (click)="selectuni(uni)" class="btn m-2">
@@ -103,9 +104,13 @@
           </div>
         </div>
         <div class="col-3">
-          <button *ngIf="foyer != null" class="btn btn-primary m-2">{{ foyer.nomFoyer }}</button>
+          Foyer
+          <div>
+            <button *ngIf="foyer != null" class="btn btn-primary m-2">{{ foyer.nomFoyer }}</button>
+          </div>
         </div>
         <div class="col-3">
+          Bloc
           <div *ngIf="foyer != null">
             <div *ngFor="let bloc of foyer.blocList">
               <button [ngClass]="{'btn-primary': selected_bloc === bloc, 'btn-default': selected_bloc !== bloc}"
@@ -114,11 +119,11 @@
           </div>
         </div>
         <div class="col-3">
+          Chambre
           <div *ngIf="blocs != null">
             <div *ngFor="let chambre of selected_bloc.chamberList">
-              <button [ngClass]="{'btn-primary': selected_chambre === chambre, 'btn-default': selected_chambre !== chambre}"
-               (click)="selectchambre(chambre)" class="btn m-2">{{ chambre.numeroChambre }} - {{
-                chambre.typeC }}</button>
+              <button [ngClass]="{'btn-danger': disableFull[chambre.idChambre], 'btn-primary': selected_chambre === chambre, 'btn-default': (selected_chambre !== chambre) && !disableFull[chambre.idChambre]}"
+               (click)="selectchambre(chambre)" class="btn m-2" [disabled]="disableFull[chambre.idChambre]">{{ peopleCounts[chambre.idChambre] }} / {{ chambre.typeC }} </button>
             </div>
           </div>
         </div>

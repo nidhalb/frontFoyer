@@ -35,7 +35,7 @@ export class ReservationDetailsComponent implements OnInit {
         this.chambre = chambre;
         console.log(chambre)
       })
-      this.reservationService.getNumberEtudiantForChambre(this.idReservation).subscribe((num: number) => {
+      this.reservationService.getNumberEtudiantForChambrebyRes(this.idReservation).subscribe((num: number) => {
         this.numberErudiantForChambre = num;
         console.log(num)
       })

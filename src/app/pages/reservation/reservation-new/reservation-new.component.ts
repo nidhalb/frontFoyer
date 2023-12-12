@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { bloc } from 'src/app/models/bloc';
@@ -25,11 +25,15 @@ export class ReservationNewComponent implements OnInit {
   selected_chambre: chamber;
   form: FormGroup;
   etudiants: Etudiant[];
+  peopleCounts: { [key: number]: number } = {};
+  disableFull: { [key: number]: boolean } = {};
 
   constructor(
     private reservationService: ReservationService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private renderer: Renderer2, 
+    private el: ElementRef
   ) { }
 
   ngOnInit(): void {
@@ -87,6 +91,7 @@ export class ReservationNewComponent implements OnInit {
       this.reservationService.getfoyerbyuniversite(uni.idUniversite).subscribe((foyer: foyer) => {
         this.foyer = foyer;
         this.blocs = foyer.blocList;
+        this.uncheckCheckboxes()
       })
     }
   }
@@ -98,6 +103,10 @@ export class ReservationNewComponent implements OnInit {
       console.log(bloc);
       console.log(this.chambres)
       this.form.patchValue({ idChambre: null });
+      this.chambres.forEach(chambre => {
+        this.check_people(chambre);
+      });
+      this.uncheckCheckboxes()
     }
   }
 
@@ -105,12 +114,38 @@ export class ReservationNewComponent implements OnInit {
     if (this.selected_chambre !== chambre) {
       this.selected_chambre = chambre
       this.form.patchValue({ idChambre: chambre.idChambre });
+      this.uncheckCheckboxes()
     }
   }
 
+  uncheckCheckboxes() {
+    const checkboxes = this.el.nativeElement.querySelectorAll('.custom-control-input');
+
+    checkboxes.forEach((checkbox: HTMLInputElement) => {
+      this.renderer.setProperty(checkbox, 'checked', false);
+    });
+    this.form.get('etudiantList').reset();
+  }
+
   save() {
+    console.log(this.form.value)
     this.reservationService.addReservation(this.form.value, this.form.value.idChambre).subscribe((reservation: Reservation) => {
       this.router.navigate(['reservation'])
+    })
+  }
+
+  check_people(chamber: chamber) {
+    this.reservationService.getNumberEtudiantForChambrebyChambre(chamber.idChambre).subscribe((number: number) => {
+      this.peopleCounts[chamber.idChambre] = number;
+      if ((chamber.typeC === "SIMPLE") && (number < 1)) {
+        this.disableFull[chamber.idChambre] = false;
+      } else if ((chamber.typeC === "DOUBLE") && (number < 2)) {
+        this.disableFull[chamber.idChambre] = false;
+      } else if ((chamber.typeC === "TRIPLE") && (number < 3)) {
+        this.disableFull[chamber.idChambre] = false;
+      } else {
+        this.disableFull[chamber.idChambre] = true;
+      }
     })
   }
 

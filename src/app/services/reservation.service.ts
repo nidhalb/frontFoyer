@@ -44,7 +44,7 @@ export class ReservationService {
     return this.http.put<Reservation>(`${this.baseUrl}/updateState/${state}`, reservation);
   }
 
-  getNumberEtudiantForChambre(idReservaion: number): Observable<number> {
+  getNumberEtudiantForChambrebyRes(idReservaion: number): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/findNumberEtudiantInCHambre/${idReservaion}`);
   }
 
@@ -58,6 +58,10 @@ export class ReservationService {
 
   getAllEtudiants(): Observable<Etudiant[]> {
     return this.http.get<Etudiant[]>("http://localhost:8089/foyerProject/etudiant/getEd");
+  }
+
+  getNumberEtudiantForChambrebyChambre(idChambre: number): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/findNumberEtudiantInCHambreByChambre/${idChambre}`);
   }
 
 }
